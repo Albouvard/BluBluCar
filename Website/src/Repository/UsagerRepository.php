@@ -31,6 +31,7 @@ class UsagerRepository extends ServiceEntityRepository
             ;
     }
 
+
     // /**
     //  * @return Usager[] Returns an array of Usager objects
     //  */
