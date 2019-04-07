@@ -43,6 +43,7 @@ class VoyageController extends  AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $this->objectManager->persist($voyage);
             $this->objectManager->flush();
+            $this->addFlash('success',"Voyage créé avec succés");
             return $this->render('pages/home.html.twig');
         }
         return $this->render('pages/creerVoyage.html.twig', [
