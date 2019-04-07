@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Usager;
 use App\Form\UsagerLoginType;
+use App\Repository\UsagerRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,11 +22,33 @@ class UsagerController extends  AbstractController
     }
 
     /**
-     * @Route( "/" , name="usager.signin")
+     * @param Request $request
+     * @return Response
+     * @Route("/", name="usager.login")
+     */
+    public function index(){
+        return $this->render('pages/login.html.twig');
+    }
+    /**
+     * @param Request $request
+     * @return Response
+     * @Route("/", name="usager.login")
+     */
+    public function login(Request $request, UsagerRepository $usagerRepository){
+        $pseudo = $request->get('pseudo');
+        $mdp = $request->get('motdepasse');
+        $result = $usagerRepository->findUserExist($pseudo,$mdp);
+        if(empty($result)){
+            return $this->render('pages/login.html.twig');
+        }
+        else return $this->render('pages/home.html.twig');
+    }
+    /**
+     * @Route( "/signin" , name="usager.signin")
      * @param Request $request
      * @param ObjectManager $objectManager
      */
-    public function index(Request $request): Response {
+    public function new(Request $request): Response {
         $Usager = new Usager();
         $form= $this->createForm(UsagerLoginType::class,$Usager);
         $form->handleRequest($request);
