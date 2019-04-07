@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Usager;
 use App\Form\UsagerLoginType;
 use App\Repository\UsagerRepository;
+use App\Repository\VoyageRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,7 +54,7 @@ class UsagerController extends  AbstractController
      * @param Request $request
      * @param ObjectManager $objectManager
      */
-    public function new(Request $request, UsagerRepository $usagerRepository): Response {
+    public function new(Request $request): Response {
         $Usager = new Usager();
         $form = $this->createForm(UsagerLoginType::class,$Usager);
         $form->handleRequest($request);
@@ -65,6 +66,30 @@ class UsagerController extends  AbstractController
         return $this->render('pages/signin.html.twig', [
             'form'=> $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/search" , name="usager.search")
+     */
+    public function rechercherVoyage(){
+        return $this->render('pages/search.html.twig');
+    }
+
+    /**
+     * @Route("/search_validation" , name="usager.valid_search")
+     */
+    public function rechercherValidation(Request $request, VoyageRepository $voyageRepository){
+        $depart = $request->get('depart');
+        $arrive = $request->get('arrive');
+        $result = $voyageRepository->findByDepartArrive($depart, $arrive);
+        if(empty($result)){
+            return $this->redirectToRoute('usager.search');
+        }
+        foreach ($result as $value){
+            echo $value->getVilleDepart();
+            echo $value->getVilleArrive();
+        }
+        return $this->redirectToRoute('usager.search');
     }
 
     private function sessionStart($pseudo, $id){

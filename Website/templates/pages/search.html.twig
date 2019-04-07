@@ -1,7 +1,6 @@
-{% extends 'base_unknown.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-
     <style type="text/css">
         .card{
             width: 400px;
@@ -17,28 +16,28 @@
     </style>
     <div class="mt-4 container ml-auto mr-auto card text-light">
         <div class="card-header">
-            <h3>Connexion</h3>
+            <h3>Recherche</h3>
         </div>
-        <form action="{{ path('usager.login')}}" method="POST">
+        <form action="{{ path('usager.valid_search')}}" method="POST">
             <div class="input-group form-group mt-4">
                 <div class="input-group-prepend">
                     <span class="input-group-text"></span>
                 </div>
-                <input class="form-control" name="pseudo" type="text" placeholder="Pseudo">
+                <input class="form-control" name="depart" type="text" placeholder="Départ">
             </div>
             <div class="input-group form-group mt-4">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <span class="input-group-text"></span>
                 </div>
-                <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe">
+                <input class="form-control" name="arrive" type="text" placeholder="Arrivée">
             </div>
             <div class="form-group">
-                <input class="btn btn-primary float-right mb-4 mt-2" type="submit" value="Se connecter" />
+                <input class="btn btn-primary float-right mb-4 mt-2" type="submit" value="Rechecher" />
             </div>
         </form>
         <div class="card-footer">
             <div class="d-flex justify-content-center links">
-                Pas encore de compte ? <a class="ml-2" href="{{ path('usager.signin')}}">Créer un compte</a>
+                Pas d'itinéraire ? <a class="ml-2" href="{{ path('usager.signin')}}">Créer un voyage</a>
             </div>
         </div>
     </div>
