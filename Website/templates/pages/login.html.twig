@@ -9,18 +9,38 @@
             border-radius: 5px;
         }
 
+        .input-group-prepend span {
+            background-color: rgb(0, 123, 255);
+            border:0;
+        }
+
     </style>
 
     <div class="mt-4 container ml-auto mr-auto card text-light">
-        <h1>Connexion</h1>
+        <div class="card-header">
+            <h3>Connexion</h3>
+        </div>
         <form action="{{ path('usager.login')}}" method="POST">
-            <div>
-                <input name="pseudo" type="text" ><label>Pseudo</label>
+            <div class="input-group form-group mt-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"></span>
+                </div>
+                <input class="form-control" name="pseudo" type="text" placeholder="Pseudo">
             </div>
-            <div>
-                <input name="motdepasse" type="password" ><label>Mot de passe</label>
+            <div class="input-group form-group mt-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input class="form-control" name="motdepasse" type="password" placeholder="Mot de passe">
             </div>
-            <input type="submit" value="Se connecter" />
+            <div class="form-group">
+                <input class="btn btn-primary float-right mb-4 mt-2" type="submit" value="Se connecter" />
+            </div>
         </form>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                Pas encore de compte ? <a class="ml-2" href="{{ path('usager.signin')}}">Créer un compte</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
