@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UsagerController extends  AbstractController
 {
     /**
-     * @Route( "/signin" , name="usager.login")
+     * @Route( "/" , name="usager.login")
      * @return Response
      */
     public function index(): Response {
