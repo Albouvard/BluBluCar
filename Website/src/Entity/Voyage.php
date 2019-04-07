@@ -39,10 +39,16 @@ class Voyage
      */
     private $voyageUsagers;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Itineraire", mappedBy="idVoyage")
+     * @ORM\Column(type="string", length=255)
      */
-    private $itineraires;
+    private $ville_depart;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville_arrive;
 
     public function __construct()
     {
@@ -122,33 +128,26 @@ class Voyage
         return $this;
     }
 
-    /**
-     * @return Collection|Itineraire[]
-     */
-    public function getItineraires(): Collection
+    public function getVilleDepart(): ?string
     {
-        return $this->itineraires;
+        return $this->ville_depart;
     }
 
-    public function addItineraire(Itineraire $itineraire): self
+    public function setVilleDepart(string $ville_depart): self
     {
-        if (!$this->itineraires->contains($itineraire)) {
-            $this->itineraires[] = $itineraire;
-            $itineraire->setIdVoyage($this);
-        }
+        $this->ville_depart = $ville_depart;
 
         return $this;
     }
 
-    public function removeItineraire(Itineraire $itineraire): self
+    public function getVilleArrive(): ?string
     {
-        if ($this->itineraires->contains($itineraire)) {
-            $this->itineraires->removeElement($itineraire);
-            // set the owning side to null (unless already changed)
-            if ($itineraire->getIdVoyage() === $this) {
-                $itineraire->setIdVoyage(null);
-            }
-        }
+        return $this->ville_arrive;
+    }
+
+    public function setVilleArrive(string $ville_arrive): self
+    {
+        $this->ville_arrive = $ville_arrive;
 
         return $this;
     }
