@@ -219,4 +219,8 @@ class Usager
 
         return $this;
     }
+    public function __toString()
+    {
+        return "usager";
+    }
 }

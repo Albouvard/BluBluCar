@@ -16,7 +16,6 @@ class VoyageType extends AbstractType
             ->add('nbPlaces')
             ->add('ville_depart')
             ->add('ville_arrive')
-            ->add('idConducteur')
         ;
     }
 
