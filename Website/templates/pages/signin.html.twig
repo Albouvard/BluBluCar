@@ -12,7 +12,9 @@
     </style>
 
     <div class="mt-4 container ml-auto mr-auto card text-light">
-        <h1>Inscription</h1>
+        <div class="card-header">
+            <h3>Inscription</h3>
+        </div>
         {{ form_start(form) }}
         <div>{{ form_row(form.nom) }}</div>
         <div>{{ form_row(form.prenom) }}</div>
@@ -23,5 +25,10 @@
         <div>{{ form_row(form.motdepasse) }}</div>
         <button class=" btn btn-primary mb-4 mt-3"> S'inscrire </button>
         {{ form_end(form) }}
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                Vous aves déjà un compte ? <a class="ml-2" href="{{ path('home')}}">Se connecter</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
