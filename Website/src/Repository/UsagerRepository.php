@@ -18,6 +18,18 @@ class UsagerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Usager::class);
     }
+    public function findUserExist($pseudo,$motdepasse)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.pseudo = :pseudo and u.motdepasse = :mdp')
+            ->setParameter('pseudo', $pseudo)
+            ->setParameter('mdp', $motdepasse)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return Usager[] Returns an array of Usager objects

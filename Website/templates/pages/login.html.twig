@@ -1,0 +1,26 @@
+{% extends 'base_unknown.html.twig' %}
+
+{% block body %}
+
+    <style type="text/css">
+        .card{
+            width: 400px;
+            background-color: rgba(0,0,0,0.5) !important;
+            border-radius: 5px;
+        }
+
+    </style>
+
+    <div class="mt-4 container ml-auto mr-auto card text-light">
+        <h1>Connexion</h1>
+        <form action="{{ path('usager.login')}}" method="POST">
+            <div>
+                <input name="pseudo" type="text" ><label>Pseudo</label>
+            </div>
+            <div>
+                <input name="motdepasse" type="password" ><label>Mot de passe</label>
+            </div>
+            <input type="submit" value="Se connecter" />
+        </form>
+    </div>
+{% endblock %}
