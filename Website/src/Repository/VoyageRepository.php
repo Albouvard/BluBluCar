@@ -25,7 +25,7 @@ class VoyageRepository extends ServiceEntityRepository
             ->andWhere('v.ville_depart = :depart and v.ville_arrive = :arrive')
             ->setParameter('depart', $depart)
             ->setParameter('arrive', $arrive)
-            ->orderBy('v.id', 'ASC')
+            ->orderBy('v.horaire_at', 'ASC')
             ->getQuery()
             ->getResult()
             ;
