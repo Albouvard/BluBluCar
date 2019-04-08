@@ -31,9 +31,7 @@ class VoyageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-<<<<<<< HEAD
-
-    public function findById($id)
+   public function findById($id)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.id = :id')
@@ -43,8 +41,6 @@ class VoyageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
-=======
     public function updatePlaces($id,$nbPlaces)
     {
         $db= $this->createQueryBuilder('b')
@@ -54,7 +50,6 @@ class VoyageRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
->>>>>>> alexandre
     // /**
     //  * @return Voyage[] Returns an array of Voyage objects
     //  */
