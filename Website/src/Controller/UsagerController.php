@@ -99,6 +99,17 @@ class UsagerController extends  AbstractController
         ]);
     }
 
+    /**
+     * @Route("/contact", name="usager.contact")
+     */
+    public function contact(VoyageRepository $voyageRepository){
+        $result = $voyageRepository->findById(9);
+        $usager = $result[0]->getIdConducteur();
+        return $this->render('pages/contact.html.twig', [
+            'usager' => $usager
+        ]);
+    }
+
     private function sessionStart($pseudo, $id){
         $session = new Session();
 

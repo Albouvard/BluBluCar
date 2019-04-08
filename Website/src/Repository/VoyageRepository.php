@@ -31,6 +31,17 @@ class VoyageRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findById($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Voyage[] Returns an array of Voyage objects
     //  */

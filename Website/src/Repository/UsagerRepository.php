@@ -18,6 +18,7 @@ class UsagerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Usager::class);
     }
+
     public function findUserExist($pseudo,$motdepasse)
     {
         return $this->createQueryBuilder('u')

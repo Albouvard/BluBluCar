@@ -13,10 +13,8 @@
             border:0;
         }
 
-        .alert-perso{
-            background-color: #f2dede;
-            border-color: #ebcccc;
-            color: #a94442;
+        .btn-card {
+            width: 90px;
         }
 
     </style>
@@ -77,9 +75,12 @@
                                                 <option value="{{ i }}">{{ i }}</option>
                                             {% endfor %}
                                         </select>
-                                        <input class="btn btn-primary" type="submit" value="Réserver" />
+                                        <input class="btn btn-primary btn-card" type="submit" value="Réserver" />
                                     </div>
                                 </form>
+                                <div class="form-group float-right mt-2">
+                                    <a class="btn btn-secondary btn-card" href="{{ path('usager.contact') }}">Contact</a>
+                                </div>
                             </div>
                         </div>
                     </div>

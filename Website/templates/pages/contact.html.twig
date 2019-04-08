@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style type="text/css">
+        .card{
+            width: 400px;
+            background-color: rgba(0,0,0,0.5) !important;
+            border-radius: 5px;
+        }
+
+        .input-group-prepend span {
+            background-color: rgb(0, 123, 255);
+            border:0;
+        }
+
+    </style>
+    <div class="mt-4 container ml-auto mr-auto card text-light">
+        <div class="card-header">
+            <h3>Profil</h3>
+        </div>
+        <div class="card-body">
+            <h3 class="card-title mb-4">Pseudo : {{ usager.pseudo }}</h3>
+            <p class="card-text">Nom : {{ usager.prenom }}</p>
+            <p class="card-text">Prénom : {{ usager.nom }}</p>
+            <p class="card-text">Email : {{ usager.mail }}</p>
+            <p class="card-text">Tel : {{ usager.telephone }}</p>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-center links">
+                Pas encore de compte ? <a class="ml-2" href="{{ path('usager.signin')}}">Créer un compte</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
