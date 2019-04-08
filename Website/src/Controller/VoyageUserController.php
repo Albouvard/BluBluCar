@@ -11,6 +11,9 @@ namespace App\Controller;
 
 use App\Entity\Voyage;
 use App\Entity\VoyageUsager;
+use App\Repository\UsagerRepository;
+use App\Repository\VoyageRepository;
+use App\Repository\VoyageUsagerRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,24 +22,39 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VoyageUserController extends  AbstractController
 {
+    public $objectManager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->objectManager=$objectManager;
+    }
+
     /**
-     * @Route("/reserver",name ="voyageUser.reserver")
-     * @param Voyage $voyage
+     * @Route("/reserver/{id}/{nbPlaces}",name ="voyageUser.reserver")
+     * @param $id
      * @param Request $request
-     * @param ObjectManager $objectManager
+     * @param UsagerRepository $usagerRepository
+     * @param VoyageRepository $voyageRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function reserver(Voyage $voyage,Request $request,ObjectManager $objectManager){
-        $nbreserv = $request->get('nbPlaces');
+    public function reserver($id,$nbPlaces,Request $request,UsagerRepository $usagerRepository, VoyageRepository $voyageRepository){
+        $nbreserv = $request->get('nombreReserv');
         $session = new Session();
         $idUsager= $session->get("id");
+        $usager= $usagerRepository->find($idUsager);
+        $voyage= $voyageRepository->find($id);
         $voyageUsager = new VoyageUsager();
-        $idVoyage=$voyage->getId();
+        $intnbreserv= (integer)$nbreserv;
+        $nbRestante = $nbPlaces - $intnbreserv;
+
         $voyageUsager
-            ->setIdVoyage($idVoyage)
-            ->setIdUsager($idUsager)
-            ->setNbReservation($nbreserv);
-        $objectManager->persist($voyageUsager);
-        $objectManager->flush();
+            ->setIdVoyage($voyage)
+            ->setIdUsager($usager)
+            ->setNbReservation($intnbreserv);
+        $this->objectManager->persist($voyageUsager);
+        $voyageRepository->updatePlaces($id,$nbRestante);
+
+        $this->objectManager->flush();
         return $this->render('pages/home.html.twig');
     }
 }

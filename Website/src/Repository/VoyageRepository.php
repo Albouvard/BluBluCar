@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Voyage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -30,7 +31,15 @@ class VoyageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
+    public function updatePlaces($id,$nbPlaces)
+    {
+        $db= $this->createQueryBuilder('b')
+            ->update()
+            ->set('b.nbPlaces',$nbPlaces)
+            ->where('b.id='.$id)
+            ->getQuery()
+            ->execute();
+    }
     // /**
     //  * @return Voyage[] Returns an array of Voyage objects
     //  */

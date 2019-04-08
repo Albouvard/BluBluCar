@@ -59,20 +59,20 @@
     {% if empty == false %}
         <div class="container mt-4">
             <div class="row flex text-light">
-                {% for voyage in result %}
+                {% for Voyage in result %}
                     <div class="col-3 mt-4">
                         <div class="card" style="width: auto">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a>{{ voyage.villeDepart }} - {{ voyage.villeArrive }}</a>
+                                    <a>{{ Voyage.villeDepart }} - {{ Voyage.villeArrive }}</a>
                                 </h5>
-                                <p class="card-text"> avec {{ voyage.nbPlaces }} places</p>
-                                <p class="card-text">le {{ voyage.horaireAt|date('d/m/Y') }} à {{ voyage.horaireAt|date('h:m') }} </p>
-                                <form>
+                                <p class="card-text"> avec {{ Voyage.nbPlaces }} places</p>
+                                <p class="card-text">le {{ Voyage.horaireAt|date('d/m/Y') }} à {{ Voyage.horaireAt|date('h:m') }} </p>
+                                <form action="{{ path('voyageUser.reserver', {'id': Voyage.id,'nbPlaces' : Voyage.nbPlaces })  }}" method="POST">
                                     <div class="form-inline float-right">
-                                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" >
+                                        <select class="custom-select mr-sm-2" name ='nombreReserv' id="inlineFormCustomSelect" >
                                             <option selected>places</option>
-                                            {% for i in 1..voyage.nbPlaces %}
+                                            {% for i in 1..Voyage.nbPlaces %}
                                                 * {{ i }}
                                                 <option value="{{ i }}">{{ i }}</option>
                                             {% endfor %}
