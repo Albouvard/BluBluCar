@@ -101,6 +101,9 @@ class UsagerController extends  AbstractController
 
     /**
      * @Route("/contact/{id}", name="usager.contact")
+     * @param $id
+     * @param VoyageRepository $voyageRepository
+     * @return Response
      */
     public function contact($id ,VoyageRepository $voyageRepository){
         $result = $voyageRepository->findById($id);

@@ -25,7 +25,7 @@ class Voyage
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Usager", inversedBy="voyages")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name ="idConducteur",referencedColumnName="id", nullable=false)
      */
     private $idConducteur;
 
