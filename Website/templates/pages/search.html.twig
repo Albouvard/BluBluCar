@@ -70,14 +70,12 @@
                                 <p class="card-text">le {{ voyage.horaireAt|date('d/m/Y') }} à {{ voyage.horaireAt|date('h:m') }} </p>
                                 <form>
                                     <div class="form-inline float-right">
-                                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" >
                                             <option selected>places</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
+                                            {% for i in 1..voyage.nbPlaces %}
+                                                * {{ i }}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                            {% endfor %}
                                         </select>
                                         <input class="btn btn-primary" type="submit" value="Réserver" />
                                     </div>
