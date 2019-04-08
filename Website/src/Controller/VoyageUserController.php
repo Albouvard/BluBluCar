@@ -53,7 +53,7 @@ class VoyageUserController extends  AbstractController
             ->setNbReservation($intnbreserv);
         $this->objectManager->persist($voyageUsager);
         $voyageRepository->updatePlaces($id,$nbRestante);
-
+        $this->addFlash("success","Reservation effectuée");
         $this->objectManager->flush();
         return $this->render('pages/home.html.twig');
     }
