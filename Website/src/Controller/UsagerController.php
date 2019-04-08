@@ -7,6 +7,7 @@ use App\Form\UsagerLoginType;
 use App\Repository\UsagerRepository;
 use App\Repository\VoyageRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use PhpParser\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,24 +73,30 @@ class UsagerController extends  AbstractController
      * @Route("/search" , name="usager.search")
      */
     public function rechercherVoyage(){
-        return $this->render('pages/search.html.twig');
+        $empty = true;
+        $result = null;
+        return $this->render('pages/search.html.twig', [
+            'empty' => $empty,
+            'result' => $result
+        ]);
     }
 
     /**
      * @Route("/search_validation" , name="usager.valid_search")
      */
     public function rechercherValidation(Request $request, VoyageRepository $voyageRepository){
+        $empty = false;
         $depart = $request->get('depart');
         $arrive = $request->get('arrive');
         $result = $voyageRepository->findByDepartArrive($depart, $arrive);
         if(empty($result)){
-            return $this->redirectToRoute('usager.search');
+            $empty = true;
+            $this->addFlash("Error","Aucun résultats");
         }
-        foreach ($result as $value){
-            echo $value->getVilleDepart();
-            echo $value->getVilleArrive();
-        }
-        return $this->redirectToRoute('usager.search');
+        return $this->render('pages/search.html.twig', [
+            'empty' => $empty,
+            'result' => $result
+        ]);
     }
 
     private function sessionStart($pseudo, $id){

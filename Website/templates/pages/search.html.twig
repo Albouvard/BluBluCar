@@ -13,6 +13,12 @@
             border:0;
         }
 
+        .alert-perso{
+            background-color: #f2dede;
+            border-color: #ebcccc;
+            color: #a94442;
+        }
+
     </style>
     <div class="mt-4 container ml-auto mr-auto card text-light">
         <div class="card-header">
@@ -35,10 +41,39 @@
                 <input class="btn btn-primary float-right mb-4 mt-2" type="submit" value="Rechecher" />
             </div>
         </form>
+        {% for message in app.flashes('Error') %}
+            <div class="alert text-center text-danger" style="background-color: rgba(1,1,1,0.5)">
+{#            <div class="alert alert-perso text-center">#}
+                {{ message}}
+            </div>
+        {% endfor %}
         <div class="card-footer">
             <div class="d-flex justify-content-center links">
                 Pas d'itinéraire ? <a class="ml-2" href="{{ path('voyage.create')}}">Créer un voyage</a>
             </div>
         </div>
     </div>
+
+
+
+    {% if empty == false %}
+        <div class="container mt-5">
+            <div class="row flex text-light">
+                {% for voyage in result %}
+                    <div class="col-3">
+                        <div class="card" style="width: auto">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a>{{ voyage.villeDepart }} - {{ voyage.villeArrive }}</a>
+                                </h5>
+                                <p class="card-text"> avec {{ voyage.nbPlaces }} places</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+
 {% endblock %}
