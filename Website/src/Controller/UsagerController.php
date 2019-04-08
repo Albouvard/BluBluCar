@@ -100,10 +100,10 @@ class UsagerController extends  AbstractController
     }
 
     /**
-     * @Route("/contact", name="usager.contact")
+     * @Route("/contact/{id}", name="usager.contact")
      */
-    public function contact(VoyageRepository $voyageRepository){
-        $result = $voyageRepository->findById(9);
+    public function contact($id ,VoyageRepository $voyageRepository){
+        $result = $voyageRepository->findById($id);
         $usager = $result[0]->getIdConducteur();
         return $this->render('pages/contact.html.twig', [
             'usager' => $usager
