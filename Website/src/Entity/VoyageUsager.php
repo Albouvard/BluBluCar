@@ -38,12 +38,12 @@ class VoyageUsager
         return $this->id;
     }
 
-    public function getIdVoyage(): ?Voyage
+    public function getIdVoyage(): int
     {
         return $this->idVoyage;
     }
 
-    public function setIdVoyage(?Voyage $idVoyage): self
+    public function setIdVoyage(?int $idVoyage): self
     {
         $this->idVoyage = $idVoyage;
 
